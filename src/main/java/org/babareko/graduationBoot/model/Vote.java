@@ -28,4 +28,9 @@ public class Vote extends AbstractEntity{
     @Column(name = "date_vote", nullable = false)
     @NotNull
     private LocalDateTime dateVote;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
 }

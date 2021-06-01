@@ -2,9 +2,7 @@ package org.babareko.graduationBoot.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -25,4 +23,10 @@ public class Restaurant extends AbstractEntity{
     @Column(name = "description", nullable = false)
     @Size(min = 1, max = 250)
     private String description;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+
 }
