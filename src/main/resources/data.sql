@@ -3,7 +3,7 @@ VALUES ('Admin', 'admin'),
        ('User', '1111'),
        ('User2', 'user');
 
-INSERT INTO USER_ROLE (ROLE, USER_ID)
+INSERT INTO USER_ROLES (ROLE, USER_ID)
 VALUES ('USER', 1),
        ('ADMIN', 2),
        ('USER', 2);
@@ -21,8 +21,8 @@ VALUES ('Grand Café', 'Cafe, Restaurant, Italian, Belarusian'),
        ('Try Zhaunery', 'Bar, Pub, Beer, Pub Grub');
 
 INSERT INTO dishes(name, price, restaurant_id)
-values('Pizza', 345.34, 3),
-      ('Pasta', 145.34, 3),
+values('Pizza', 345.34, 12),
+      ('Pasta', 145.34, 12),
       ('Hamburger', 345.34, 4),
       ('Soup', 345.34, 4),
       ('Salad', 345.34, 4),
@@ -44,16 +44,16 @@ values('Pizza', 345.34, 3),
       ('Pizza', 345.34, 10),
       ('Pasta', 145.34, 10),
       ('Hamburger', 345.34, 10),
-      ('Soup', 345.34, 2),
-      ('Salad', 345.34, 2);
+      ('Soup', 345.34, 13),
+      ('Salad', 345.34, 13);
 
 INSERT INTO votes(user_id, restaurant_id, date_vote)
 values (1, 8,'2021-05-24 10:00:00'),
        (1, 5,'2021-05-23 14:00:00'),
        (1, 8,'2021-05-22 10:00:00'),
-       (1, 2,'2021-05-21 10:00:00'),
+       (1, 12,'2021-05-21 10:00:00'),
        (2, 8,'2021-05-24 10:00:00'),
        (2, 5,'2021-05-23 14:00:00'),
        (2, 4,'2021-05-22 11:00:00'),
-       (2, 3,'2021-05-21 12:00:00');
+       (2, 13,'2021-05-21 12:00:00');
 
