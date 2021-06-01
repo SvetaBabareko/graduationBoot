@@ -16,6 +16,9 @@ import java.util.Objects;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public abstract class AbstractEntity implements Persistable<Integer> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
    /* public static final int START_SEQ = 100000;
 
