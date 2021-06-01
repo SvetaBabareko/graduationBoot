@@ -1,5 +1,7 @@
 package org.babareko.graduationBoot.model;
 
+import lombok.*;
+import org.springframework.data.domain.Persistable;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -8,7 +10,13 @@ import java.util.Objects;
 //@MappedSuperclass
 // http://stackoverflow.com/questions/594597/hibernate-annotations-which-is-better-field-or-property-access
 //@Access(AccessType.FIELD)
-public interface AbstractEntity {
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
+public abstract class AbstractEntity implements Persistable<Integer> {
+    protected Integer id;
    /* public static final int START_SEQ = 100000;
 
     @Id
@@ -29,28 +37,16 @@ public interface AbstractEntity {
         return Objects.hash(id);
     }
 
-    public AbstractEntity() {
-    }
 
-    public AbstractEntity(Integer id) {
-        this.id = id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
 
     public int id() {
         Assert.notNull(id, "Entity must have id");
         return id;
-    }
+    }*/
 
+    @Override
     public boolean isNew() {
         return this.id == null;
-    }*/
+    }
 
 }
