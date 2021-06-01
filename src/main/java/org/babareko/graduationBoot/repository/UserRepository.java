@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-//@Transactional(readOnly = true)
+@Transactional(readOnly = true)
 public interface UserRepository extends JpaRepository<User, Integer> {
 
    /* @Transactional
@@ -22,13 +22,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
    //    https://stackoverflow.com/a/46013654/548473
     @EntityGraph(attributePaths = {"votes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT u FROM User u WHERE u.id=?1")
-    User getWithVotes(int id);
+    User getWithVotes(int id);*/
 
-    User getById(int id);
+    User findById(int id);
 
-    List<User> getAll();
 
-    User getByName(String name);*/
+    User findByName(String name);
 
 
 }

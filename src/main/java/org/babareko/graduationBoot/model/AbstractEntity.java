@@ -2,14 +2,15 @@ package org.babareko.graduationBoot.model;
 
 import lombok.*;
 import org.springframework.data.domain.Persistable;
+import org.springframework.data.util.ProxyUtils;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-//@MappedSuperclass
+@MappedSuperclass
 // http://stackoverflow.com/questions/594597/hibernate-annotations-which-is-better-field-or-property-access
-//@Access(AccessType.FIELD)
+@Access(AccessType.FIELD)
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,37 +20,29 @@ public abstract class AbstractEntity implements Persistable<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
-   /* public static final int START_SEQ = 100000;
+     protected Integer id;
 
-    @Id
-    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
-    protected Integer id;
+    //@JsonIgnore
+    @Override
+    public boolean isNew() {
+        return id == null;
+    }
 
+    //    https://stackoverflow.com/questions/1638723
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !getClass().equals(ProxyUtils.getUserClass(o))) {
+            return false;
+        }
         AbstractEntity that = (AbstractEntity) o;
-        return Objects.equals(id, that.id);
+        return id != null && id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return id == null ? 0 : id;
     }
-
-
-
-    public int id() {
-        Assert.notNull(id, "Entity must have id");
-        return id;
-    }*/
-
-    @Override
-    public boolean isNew() {
-        return this.id == null;
-    }
-
 }
