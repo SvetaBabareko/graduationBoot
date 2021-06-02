@@ -1,5 +1,6 @@
 package org.babareko.graduationBoot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.util.ProxyUtils;
@@ -22,7 +23,7 @@ public abstract class AbstractEntity implements Persistable<Integer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      protected Integer id;
 
-    //@JsonIgnore
+    @JsonIgnore
     @Override
     public boolean isNew() {
         return id == null;
