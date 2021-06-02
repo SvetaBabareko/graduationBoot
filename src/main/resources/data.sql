@@ -4,9 +4,9 @@ VALUES ('Admin', 'admin'),
        ('User2', 'user');
 
 INSERT INTO USER_ROLES (ROLE, USER_ID)
-VALUES ('USER', 1),
-       ('ADMIN', 2),
-       ('USER', 2);
+VALUES ('ADMIN', 1),
+       ('USER', 2),
+       ('USER', 3);
 
 INSERT INTO restaurants (name, description)
 VALUES ('Grand Café', 'Cafe, Restaurant, Italian, Belarusian'),
