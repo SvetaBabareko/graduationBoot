@@ -1,16 +1,16 @@
 package org.babareko.graduationBoot.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
-
+import org.babareko.graduationBoot.util.JsonDeserializers;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.Set;
 
 
@@ -32,6 +32,8 @@ public class User extends AbstractEntity implements Serializable {
     @Column(name = "password", nullable = false)
     @NotBlank
     @Size(min = 5, max = 100)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonDeserialize(using = JsonDeserializers.PasswordDeserializer.class)
     private String password;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
