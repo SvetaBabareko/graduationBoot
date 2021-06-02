@@ -2,14 +2,10 @@ package org.babareko.graduationBoot.repository;
 
 
 import org.babareko.graduationBoot.model.User;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -24,10 +20,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("SELECT u FROM User u WHERE u.id=?1")
     User getWithVotes(int id);*/
 
-    User findById(int id);
+    Optional<User> findById(int id);
 
 
-    User findByName(String name);
+    Optional<User> findByName(String name);
 
 
 }

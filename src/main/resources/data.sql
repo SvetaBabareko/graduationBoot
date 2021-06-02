@@ -1,7 +1,7 @@
 INSERT INTO users (name, password)
-VALUES ('Admin', 'admin'),
-       ('User', '1111'),
-       ('User2', 'user');
+VALUES ('Admin', '{noop}admin'),
+       ('User', '{noop}1111'),
+       ('User2', '{noop}user');
 
 INSERT INTO USER_ROLES (ROLE, USER_ID)
 VALUES ('ADMIN', 1),

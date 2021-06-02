@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
@@ -18,9 +19,9 @@ import java.util.Set;
 @Setter
 @Getter
 @ToString(callSuper = true, exclude = {"password"})
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class User extends AbstractEntity {
+public class User extends AbstractEntity implements Serializable {
 
 
     @Column(name = "name", nullable = false)
@@ -45,4 +46,6 @@ public class User extends AbstractEntity {
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+
 }
