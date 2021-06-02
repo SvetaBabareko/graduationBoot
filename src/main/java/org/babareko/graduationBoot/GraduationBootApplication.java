@@ -9,17 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @AllArgsConstructor
-public class GraduationBootApplication implements ApplicationRunner {
-	private final UserRepository userRepository;
+public class GraduationBootApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GraduationBootApplication.class, args);
 	}
 
-	@Override
-	public void run(ApplicationArguments args) throws Exception{
-		System.out.println(userRepository.findByName("User2"));
-	}
+
 
 
 }
