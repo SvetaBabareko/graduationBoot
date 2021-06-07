@@ -3,7 +3,7 @@ package org.babareko.graduationBoot.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
-import org.babareko.graduationBoot.util.JsonDeserializers;
+import org.babareko.graduationBoot.util.json.JsonDeserializers;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

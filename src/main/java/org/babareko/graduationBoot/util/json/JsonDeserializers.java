@@ -1,4 +1,4 @@
-package org.babareko.graduationBoot.util;
+package org.babareko.graduationBoot.util.json;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
