@@ -24,4 +24,9 @@ public class Restaurant extends AbstractEntity{
     @Size(min = 1, max = 250)
     private String description;
 
+    public Restaurant(int id, String name, String description) {
+        super(id);
+        this.name = name;
+        this.description = description;
+    }
 }
