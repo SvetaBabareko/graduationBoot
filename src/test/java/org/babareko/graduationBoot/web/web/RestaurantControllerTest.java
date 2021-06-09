@@ -47,6 +47,29 @@ public class RestaurantControllerTest extends AbstractControllerTest {
     }
 
 
+    @Test
+    public void getForUser() throws Exception {
+        perform(MockMvcRequestBuilders.get(URL + "/8")
+                .with(TestUtil.userHttpBasic(UserTestData.user)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(RESTAURANT_MATCHER.contentJson(restaurant5));
+    }
+
+    @Test
+    @DirtiesContext(methodMode = BEFORE_METHOD)
+    public void getAllForUser() throws Exception {
+        perform(MockMvcRequestBuilders.get(URL + "/")
+                .with(TestUtil.userHttpBasic(UserTestData.user)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(RESTAURANT_MATCHER.contentJson(restaurantList));
+    }
+
+
+
 }
 
 
