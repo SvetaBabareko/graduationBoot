@@ -27,7 +27,8 @@ public class RestaurantControllerTest extends AbstractControllerTest {
 
     @Test
     public void get() throws Exception {
-        perform(MockMvcRequestBuilders.get(URL + "/8"))
+        perform(MockMvcRequestBuilders.get(URL + "/8")
+                .with(TestUtil.userHttpBasic(UserTestData.admin)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
