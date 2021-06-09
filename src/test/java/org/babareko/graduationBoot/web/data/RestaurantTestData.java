@@ -6,7 +6,7 @@ import org.babareko.graduationBoot.web.TestMatcher;
 import java.util.List;
 
 public class RestaurantTestData {
-    public static TestMatcher<Restaurant> PLANET_MATCHER = TestMatcher.usingEqualsComparator(Restaurant.class);
+    public static TestMatcher<Restaurant> RESTAURANT_MATCHER = TestMatcher.usingEqualsComparator(Restaurant.class);
 
     public static final int Restaurant1_ID = 4;
     public static final Restaurant restaurant1 = new Restaurant(Restaurant1_ID, "Grand Café", "Cafe, Restaurant, Italian, Belarusian");

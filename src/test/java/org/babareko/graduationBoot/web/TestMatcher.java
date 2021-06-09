@@ -1,5 +1,6 @@
 package org.babareko.graduationBoot.web;
 
+import org.babareko.graduationBoot.model.User;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class TestMatcher <T> {
                 (a, e) -> assertThat(a).usingRecursiveComparison().ignoringFields(fieldsToIgnore).isEqualTo(e),
                 (a, e) -> assertThat(a).usingElementComparatorIgnoringFields(fieldsToIgnore).isEqualTo(e));
     }
+
 
     public void assertMatch(T actual, T expected) {
         assertion.accept(actual, expected);
