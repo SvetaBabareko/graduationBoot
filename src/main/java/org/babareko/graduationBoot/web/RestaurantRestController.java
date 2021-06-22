@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.babareko.graduationBoot.model.Restaurant;
 import org.babareko.graduationBoot.repository.RestaurantRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -44,5 +46,20 @@ public class RestaurantRestController {
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
+
+
+    @PutMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public Restaurant update(@PathVariable(value = "id") Integer id,
+                         @Valid @RequestBody Restaurant restaurantNew) throws EntityNotFoundException {
+        log.info("update restaurant {}: {}", id, restaurantNew);
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException());
+        restaurant.setName(restaurantNew.getName());
+        restaurant.setDescription(restaurantNew.getDescription());
+        return restaurantRepository.save(restaurant);
+    }
+
+
 
 }
