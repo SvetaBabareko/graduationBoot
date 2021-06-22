@@ -4,6 +4,7 @@ import org.babareko.graduationBoot.model.User;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.babareko.graduationBoot.web.TestUtil.readListFromJsonMvcResult;
@@ -38,6 +39,12 @@ public class TestMatcher <T> {
 
     public void assertMatch(T actual, T expected) {
         assertion.accept(actual, expected);
+    }
+
+    public void assertMatch(Optional<T> actual, Optional<T>  expected) {
+        assertion.accept((T) actual, (T)expected);
+
+
     }
 
     @SafeVarargs

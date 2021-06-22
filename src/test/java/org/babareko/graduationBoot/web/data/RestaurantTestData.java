@@ -23,9 +23,15 @@ public class RestaurantTestData {
     public static final List<Restaurant> restaurantList = List.of(restaurant1,restaurant2, restaurant3, restaurant4,
             restaurant5, restaurant6, restaurant7,restaurant8, restaurant9, restaurant10);
 
-    public static Restaurant getNewRestaurant() {
-        return new Restaurant( "New_Restaurant", "Description for a new restaurant");
-    }
+    public static final Restaurant restaurantNew = new Restaurant("New_Restaurant", "Description for a new restaurant");
+
+    public static final List<Restaurant> restaurantListWithNew = List.of(restaurant1,restaurant2, restaurant3, restaurant4,
+            restaurant5, restaurant6, restaurant7,restaurant8, restaurant9, restaurant10, restaurantNew);
+
+    //public static Restaurant getNewRestaurant() {
+    //    return new Restaurant("New_Restaurant", "Description for a new restaurant");
+    //}
+
 
     public static Restaurant getUpdated() {
         return new Restaurant(Restaurant1_ID+8, "Name_Updated", "Description_updated");
