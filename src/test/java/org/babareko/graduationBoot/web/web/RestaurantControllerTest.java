@@ -15,6 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Optional;
+
 import static org.babareko.graduationBoot.web.data.RestaurantTestData.*;
 import static org.springframework.test.annotation.DirtiesContext.MethodMode.BEFORE_METHOD;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -85,7 +87,20 @@ public class RestaurantControllerTest extends AbstractControllerTest {
         expected.setId(newId);
 
         RESTAURANT_MATCHER.assertMatch(created, expected);
-        RESTAURANT_MATCHER.assertMatch(restaurantRestController.getAll(),restaurantListWithNew);
+        RESTAURANT_MATCHER.assertMatch(restaurantRestController.getAll(), restaurantListWithNew);
+    }
+
+    @Test
+    @DirtiesContext(methodMode = BEFORE_METHOD)
+    public void update() throws Exception {
+        Restaurant updated = getUpdated();
+        perform(MockMvcRequestBuilders.put(URL + "/12")
+                .with(TestUtil.userHttpBasic(UserTestData.admin))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(updated)))
+                .andExpect(status().isNoContent());
+
+        RESTAURANT_MATCHER.assertMatch(restaurantRestController.getAll(), restaurantList);
     }
 
 

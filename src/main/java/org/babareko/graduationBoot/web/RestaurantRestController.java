@@ -59,7 +59,4 @@ public class RestaurantRestController {
         restaurant.setDescription(restaurantNew.getDescription());
         return restaurantRepository.save(restaurant);
     }
-
-
-
 }
