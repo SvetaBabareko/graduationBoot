@@ -32,7 +32,6 @@ public class RestaurantTestData {
             restaurant5, restaurant6, restaurant7,restaurant8, restaurant10);
 
 
-    //public static final Restaurant restaurantNew = new Restaurant(
     public static Restaurant getUpdated() {
         return new Restaurant(12, "Name_Updated", "Description_updated");
     }

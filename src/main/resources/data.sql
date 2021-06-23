@@ -24,7 +24,7 @@ INSERT INTO dishes(name, price, restaurant_id)
 values('Pizza', 345.34, 12),
       ('Pasta', 145.34, 12),
       ('Hamburger', 345.34, 4),
-      ('Soup', 345.34, 4),
+      ('Soup', 341.34, 4),
       ('Salad', 345.34, 4),
       ('Bread', 145.34, 4),
       ('Rice', 345.34, 5),
