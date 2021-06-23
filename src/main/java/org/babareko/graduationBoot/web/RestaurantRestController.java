@@ -51,7 +51,7 @@ public class RestaurantRestController {
     @PutMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public Restaurant update(@PathVariable(value = "id") Integer id,
-                         @Valid @RequestBody Restaurant restaurantNew) throws EntityNotFoundException {
+                             @Valid @RequestBody Restaurant restaurantNew) throws EntityNotFoundException {
         log.info("update restaurant {}: {}", id, restaurantNew);
         Restaurant restaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
@@ -59,4 +59,14 @@ public class RestaurantRestController {
         restaurant.setDescription(restaurantNew.getDescription());
         return restaurantRepository.save(restaurant);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable int id) throws EntityNotFoundException {
+        log.info("delete restaurant {}", id);
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException());
+        restaurantRepository.delete(restaurant);
+    }
+
 }
