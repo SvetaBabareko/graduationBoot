@@ -28,6 +28,9 @@ public class RestaurantTestData {
     public static final List<Restaurant> restaurantListWithNew = List.of(restaurant1,restaurant2, restaurant3, restaurant4,
             restaurant5, restaurant6, restaurant7,restaurant8, restaurant9, restaurant10, restaurantNew);
 
+    public static final List<Restaurant> restaurantListForDelete = List.of(restaurant1,restaurant2, restaurant3, restaurant4,
+            restaurant5, restaurant6, restaurant7,restaurant8, restaurant10);
+
 
     //public static final Restaurant restaurantNew = new Restaurant(
     public static Restaurant getUpdated() {
