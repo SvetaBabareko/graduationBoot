@@ -37,7 +37,7 @@ public class Restaurant extends AbstractEntity{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
           //  cascade = CascadeType.ALL)
     //@JsonIgnore
-    @JsonBackReference
+    //@JsonBackReference
     private List<Dish> dishes;
 
     public Restaurant(String name, String description) {

@@ -20,20 +20,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 public class DishControllerTest extends AbstractControllerTest {
-    static final String URL = "/api/restaurants/4/dishes";
+    static final String URL = "/api/dishes";
 
     @Autowired
     private DishRestController dishRestController;
 
     @Test
     @DirtiesContext(methodMode = BEFORE_METHOD)
-    public void getAll() throws Exception {
+    public void getAllForAdmin() throws Exception {
        perform(MockMvcRequestBuilders.get(URL + "/")
                 .with(TestUtil.userHttpBasic(UserTestData.admin)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(DISH_MATCHER.contentJson(dishListForRestaurant4));
+                .andExpect(DISH_MATCHER.contentJson(dishList));
     }
 
 

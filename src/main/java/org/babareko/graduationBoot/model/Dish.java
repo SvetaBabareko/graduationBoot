@@ -35,6 +35,14 @@ public class Dish extends AbstractEntity{
     @JoinColumn(name = "restaurant_id", nullable = false)
     //@OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference
+    //@JsonManagedReference
     @NotNull
     private Restaurant restaurant;
+
+
+    public Dish(int id, String name, double price) {
+        super(id);
+        this.name = name;
+        this.price = price;
+    }
 }

@@ -36,7 +36,7 @@ create table dishes
 (
     id                      integer default global_seq.nextval      primary key,
     name                    varchar                                 not null,
-    price                   bigint                                  not null,
+    price                   double                                  not null,
     restaurant_id           integer                                 not null,
     constraint dishes_idx unique (name, restaurant_id),
     foreign key (restaurant_id) references restaurants (id) on delete cascade
