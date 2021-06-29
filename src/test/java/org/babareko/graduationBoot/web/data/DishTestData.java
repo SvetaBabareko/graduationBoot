@@ -7,7 +7,7 @@ import org.babareko.graduationBoot.web.TestMatcher;
 import java.util.List;
 
 public class DishTestData {
-    public static TestMatcher<Dish> Dish_MATCHER = TestMatcher.usingEqualsComparator(Dish.class);
+    public static TestMatcher<Dish> DISH_MATCHER = TestMatcher.usingEqualsComparator(Dish.class);
 
     public static final Restaurant restaurant4 = new Restaurant(4, "BAR:DOT XX1", "Hotel Restaurant, Asian, Fusion");
 

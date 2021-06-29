@@ -31,6 +31,12 @@ public class RestaurantRestController {
         return restaurantRepository.findAll();
     }
 
+    @GetMapping("/{id}/dishes")
+    public Restaurant getWithDishes(@PathVariable Integer id) {
+        log.info("get restaurant {} with dishes", id);
+        return restaurantRepository.findAllWithDishes(id);
+    }
+
     @GetMapping("/{id}")
     public Optional<Restaurant> get(@PathVariable Integer id) {
         log.info("get restaurant {}", id);
@@ -54,7 +60,7 @@ public class RestaurantRestController {
                              @Valid @RequestBody Restaurant restaurantNew) throws EntityNotFoundException {
         log.info("update restaurant {}: {}", id, restaurantNew);
         Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException());
+                .orElseThrow(EntityNotFoundException::new);
         restaurant.setName(restaurantNew.getName());
         restaurant.setDescription(restaurantNew.getDescription());
         return restaurantRepository.save(restaurant);
@@ -65,7 +71,7 @@ public class RestaurantRestController {
     public void delete(@PathVariable int id) throws EntityNotFoundException {
         log.info("delete restaurant {}", id);
         Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException());
+                .orElseThrow(EntityNotFoundException::new);
         restaurantRepository.delete(restaurant);
     }
 
