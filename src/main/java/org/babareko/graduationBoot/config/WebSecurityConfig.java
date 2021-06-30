@@ -51,8 +51,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/account/register").anonymous()
                 .antMatchers("/api/account").hasRole(Role.USER.name())
                 //.antMatchers("/api/**").hasRole(Role.ADMIN.name())
-                .antMatchers("/api/admin/**").hasAuthority(Role.ADMIN.getAuthority())
+               // .antMatchers("/api/admin/**").hasAuthority(Role.ADMIN.getAuthority())
                 .antMatchers("/api/**").authenticated()
+                .antMatchers("api/dishes").hasRole(Role.ADMIN.name())
                 .and().httpBasic()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();
