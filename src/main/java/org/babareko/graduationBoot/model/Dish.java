@@ -45,4 +45,9 @@ public class Dish extends AbstractEntity{
         this.name = name;
         this.price = price;
     }
+
+    public Dish(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
 }
