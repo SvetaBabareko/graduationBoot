@@ -31,7 +31,7 @@ import java.util.EnumSet;
 public class AccountController {
     static final String URL = "/api/account";
 
-   // private final UserRepository userRepository;
+    // private final UserRepository userRepository;
 
     private final UserService userService;
 
@@ -43,8 +43,22 @@ public class AccountController {
     @GetMapping
     public User get(@AuthenticationPrincipal AuthUser authUser) {
         int id = authUser.id();
-         log.info("get {}", authUser);
+        log.info("get {}", authUser);
         return userService.get(id);
+    }
+
+
+    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public ResponseEntity<User> register(@Valid @RequestBody User user) {
+        log.info("register {}", user);
+        ValidationUtil.checkNew(user);
+        user.setRoles(EnumSet.of(Role.USER));
+        user = userService.save(user);
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/api/account")
+                .build().toUri();
+        return ResponseEntity.created(uriOfNewResource).body(user);
     }
 
    /* @DeleteMapping
@@ -53,19 +67,6 @@ public class AccountController {
     public void delete(@AuthenticationPrincipal AuthUser authUser) {
         log.info("delete {}", authUser);
         userRepository.deleteById(authUser.id());
-    }
-
-    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public ResponseEntity<User> register(@Valid @RequestBody User user) {
-        log.info("register {}", user);
-        ValidationUtil.checkNew(user);
-        user.setRoles(EnumSet.of(Role.USER));
-        user = userRepository.save(user);
-        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/api/account")
-                .build().toUri();
-        return ResponseEntity.created(uriOfNewResource).body(user);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

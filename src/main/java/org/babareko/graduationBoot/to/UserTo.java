@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -27,4 +28,5 @@ public class UserTo extends BaseTo implements Serializable {
         this.name = name;
         this.password = password;
     }
+
 }

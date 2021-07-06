@@ -48,7 +48,7 @@ public class User extends AbstractEntity implements Serializable {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    public User(int id, String name, String password, Collection<Role> roles) {
+    public User(Integer id, String name, String password, Collection<Role> roles) {
         this(name, password, true, new Date(), EnumSet.copyOf(roles));
         this.id = id;
     }
