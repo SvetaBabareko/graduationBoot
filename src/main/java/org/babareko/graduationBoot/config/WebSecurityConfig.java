@@ -1,5 +1,6 @@
 package org.babareko.graduationBoot.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.babareko.graduationBoot.AuthUser;
@@ -28,6 +29,7 @@ import java.util.Optional;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static final PasswordEncoder PASSWORD_ENCODER = PasswordEncoderFactories.createDelegatingPasswordEncoder();
     private final UserRepository userRepository;
+    //private final ObjectMapper objectMapper;
 
     @Bean
     public UserDetailsService userDetailsService() {

@@ -1,9 +1,6 @@
 package org.babareko.graduationBoot.to;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -11,9 +8,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 @NoArgsConstructor
-@Setter
-@Getter
-@ToString
+@Data
 public class UserTo extends BaseTo implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

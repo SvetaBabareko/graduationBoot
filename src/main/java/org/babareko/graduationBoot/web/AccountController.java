@@ -6,7 +6,9 @@ import org.babareko.graduationBoot.AuthUser;
 import org.babareko.graduationBoot.model.Role;
 import org.babareko.graduationBoot.model.User;
 import org.babareko.graduationBoot.repository.UserRepository;
+import org.babareko.graduationBoot.service.UserService;
 import org.babareko.graduationBoot.util.ValidationUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.hateoas.EntityModel;
@@ -18,28 +20,34 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.swing.text.html.parser.Entity;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.EnumSet;
 
 @RestController
 @RequestMapping(AccountController.URL)
-@AllArgsConstructor
+//@AllArgsConstructor
 @Slf4j
 public class AccountController {
     static final String URL = "/api/account";
 
-    private final UserRepository userRepository;
+   // private final UserRepository userRepository;
 
-    @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
-    public User get(@AuthenticationPrincipal AuthUser authUser) {
-         log.info("get {}", authUser);
-        // return ASSEMBLER.toModel(authUser.getUser());
-        return authUser.getUser();
+    private final UserService userService;
+
+    @Autowired
+    public AccountController(UserService userService) {
+        this.userService = userService;
     }
 
-    @DeleteMapping
+    @GetMapping
+    public User get(@AuthenticationPrincipal AuthUser authUser) {
+        int id = authUser.id();
+         log.info("get {}", authUser);
+        return userService.get(id);
+    }
+
+   /* @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @CacheEvict(value = "users", key = "#authUser.username")
     public void delete(@AuthenticationPrincipal AuthUser authUser) {
@@ -72,5 +80,5 @@ public class AccountController {
             user.setPassword(oldUser.getPassword());
         }
         return userRepository.save(user);
-    }
+    }*/
 }
