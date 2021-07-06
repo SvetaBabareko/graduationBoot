@@ -23,12 +23,12 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.EnumSet;
 
-//@RestController
-//@RequestMapping(AccountController.URL)
-//@AllArgsConstructor
-//@Slf4j
+@RestController
+@RequestMapping(AccountController.URL)
+@AllArgsConstructor
+@Slf4j
 public class AccountController {
-   /* static final String URL = "/api/account";
+    static final String URL = "/api/account";
 
     private final UserRepository userRepository;
 
@@ -72,5 +72,5 @@ public class AccountController {
             user.setPassword(oldUser.getPassword());
         }
         return userRepository.save(user);
-    }*/
+    }
 }

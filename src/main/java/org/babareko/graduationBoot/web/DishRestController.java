@@ -6,11 +6,13 @@ import org.babareko.graduationBoot.model.Dish;
 import org.babareko.graduationBoot.model.Restaurant;
 import org.babareko.graduationBoot.repository.DishRepository;
 import org.babareko.graduationBoot.repository.RestaurantRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -48,6 +50,18 @@ public class DishRestController {
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
+
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable int id) throws EntityNotFoundException {
+        log.info("delete dish {}", id);
+        Dish dish = dishRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        dishRepository.delete(dish);
+    }
+
+
 
 
 }

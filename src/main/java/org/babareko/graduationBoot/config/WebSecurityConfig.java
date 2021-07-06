@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/api/**").hasRole(Role.ADMIN.name())
                // .antMatchers("/api/admin/**").hasAuthority(Role.ADMIN.getAuthority())
                 .antMatchers("/api/**").authenticated()
-                .antMatchers("api/dishes").hasRole(Role.ADMIN.name())
+                .antMatchers("api/dishes/**").hasRole(Role.ADMIN.name())
                 .and().httpBasic()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();

@@ -73,6 +73,28 @@ public class DishControllerTest extends AbstractControllerTest {
                 .andExpect(DISH_MATCHER.contentJson(dish13));
     }
 
+    @Test
+    public void deleteForAdmin() throws Exception {
+        perform(MockMvcRequestBuilders.delete(URL + "/16")
+                .with(TestUtil.userHttpBasic(UserTestData.admin)))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        DISH_MATCHER.assertMatch(dishRestController.getAll(), dishListWithDelete);
+    }
+
+    @Test
+    public void deleteForUser() throws Exception {
+        perform(MockMvcRequestBuilders.delete(URL + "/17")
+                .with(TestUtil.userHttpBasic(UserTestData.user)))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        DISH_MATCHER.assertMatch(dishRestController.getAll(), dishListWithDeleteForUser);
+    }
+
+
+
 
 
 

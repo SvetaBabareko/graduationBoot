@@ -79,7 +79,13 @@ public class DishTestData {
             dish9, dish10, dish11, dish12, dish13, dish14, dish15, dish16, dish17, dish18, dish19, dish20, dish21,
             dish22, dish23, dish24, dish25, dishNew);
 
-    public static final List<Dish> dishListForRestaurant4ForDelete = List.of(dish1, dish3, dish4);
+    public static final List<Dish> dishListWithDelete = List.of(dish1, dish2, dish4, dish5, dish6, dish7, dish8,
+            dish9, dish10, dish11, dish12, dish13, dish14, dish15, dish16, dish17, dish18, dish19, dish20, dish21,
+            dish22, dish23, dish24, dish25);
+
+    public static final List<Dish> dishListWithDeleteForUser = List.of(dish1, dish2, dish3, dish5, dish6, dish7, dish8,
+            dish9, dish10, dish11, dish12, dish13, dish14, dish15, dish16, dish17, dish18, dish19, dish20, dish21,
+            dish22, dish23, dish24, dish25);
 
     public static Dish getUpdated() {
         return new Dish("Name_Updated", 1234567.11, restaurant4);
