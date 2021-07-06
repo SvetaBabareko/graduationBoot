@@ -11,6 +11,8 @@ public class UserFacade {
         UserTo userTo = new UserTo();
         userTo.setId(user.getId());
         userTo.setName(user.getName());
+
+        ///узнай, нужно ли поле пароль в ТО объекте...
         userTo.setPassword(user.getPassword());
         return userTo;
     }
