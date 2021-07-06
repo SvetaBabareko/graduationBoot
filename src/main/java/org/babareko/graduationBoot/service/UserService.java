@@ -8,12 +8,14 @@ import org.babareko.graduationBoot.util.exception.UserNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static org.babareko.graduationBoot.config.WebSecurityConfig.PASSWORD_ENCODER;
 
@@ -45,5 +47,13 @@ public class UserService implements UserDetailsService {
 
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    public void deleteById(int id) {
+        userRepository.deleteById(id);
+    }
+
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 }

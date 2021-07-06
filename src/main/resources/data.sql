@@ -5,6 +5,7 @@ VALUES ('Admin', '{noop}admin'),
 
 INSERT INTO USER_ROLES (ROLE, USER_ID)
 VALUES ('ADMIN', 1),
+       ('USER', 1),
        ('USER', 2),
        ('USER', 3);
 

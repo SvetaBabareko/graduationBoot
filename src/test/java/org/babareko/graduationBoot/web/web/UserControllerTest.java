@@ -3,9 +3,11 @@ package org.babareko.graduationBoot.web.web;
 import org.babareko.graduationBoot.facade.UserFacade;
 import org.babareko.graduationBoot.model.Dish;
 import org.babareko.graduationBoot.model.User;
+import org.babareko.graduationBoot.repository.UserRepository;
 import org.babareko.graduationBoot.service.UserService;
 import org.babareko.graduationBoot.to.UserTo;
 import org.babareko.graduationBoot.util.UserUtil;
+import org.babareko.graduationBoot.util.exception.UserNotFoundException;
 import org.babareko.graduationBoot.util.json.JsonUtil;
 import org.babareko.graduationBoot.web.AbstractControllerTest;
 import org.babareko.graduationBoot.web.AccountController;
@@ -13,6 +15,7 @@ import org.babareko.graduationBoot.web.RestaurantRestController;
 import org.babareko.graduationBoot.web.TestUtil;
 import org.babareko.graduationBoot.web.data.UserTestData;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
@@ -21,7 +24,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.babareko.graduationBoot.web.data.RestaurantTestData.RESTAURANT_MATCHER;
+import java.util.List;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,6 +39,9 @@ public class UserControllerTest extends AbstractControllerTest {
 
     @Autowired
     protected UserService userService;
+
+    @Autowired
+    protected UserRepository userRepository;
 
     @Autowired
     private AccountController accountController;
@@ -66,6 +73,14 @@ public class UserControllerTest extends AbstractControllerTest {
 
         USER_MATCHER.assertMatch(created, returned);
         USER_MATCHER.assertMatch(userService.get(newId), returned);
+    }
+
+    @Test
+    public void delete() throws Exception {
+        perform(MockMvcRequestBuilders.delete(URL)
+                .with(TestUtil.userHttpBasic(user)))
+                .andExpect(status().isNoContent());
+        USER_MATCHER.assertMatch(accountController.getAll(), List.of(admin,user2));
     }
 
 

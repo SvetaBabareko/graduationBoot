@@ -23,6 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.EnumSet;
+import java.util.List;
 
 @RestController
 @RequestMapping(AccountController.URL)
@@ -61,14 +62,18 @@ public class AccountController {
         return ResponseEntity.created(uriOfNewResource).body(user);
     }
 
-   /* @DeleteMapping
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @CacheEvict(value = "users", key = "#authUser.username")
     public void delete(@AuthenticationPrincipal AuthUser authUser) {
         log.info("delete {}", authUser);
-        userRepository.deleteById(authUser.id());
+        userService.deleteById(authUser.id());
     }
 
+    public List<User> getAll() {
+        return userService.getAll();
+    }
+/*
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @CachePut(value = "users", key = "#authUser.username")
