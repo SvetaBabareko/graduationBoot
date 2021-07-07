@@ -33,7 +33,7 @@ public class DishControllerTest extends AbstractControllerTest {
     @Test
     @DirtiesContext(methodMode = BEFORE_METHOD)
     public void getAllForAdmin() throws Exception {
-       perform(MockMvcRequestBuilders.get(URL + "/")
+        perform(MockMvcRequestBuilders.get(URL + "/")
                 .with(TestUtil.userHttpBasic(UserTestData.admin)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -96,7 +96,7 @@ public class DishControllerTest extends AbstractControllerTest {
     @Test
     public void createForAdmin() throws Exception {
         Dish expected = dishNew;
-        ResultActions action = perform(MockMvcRequestBuilders.post(URL + "/")
+        ResultActions action = perform(MockMvcRequestBuilders.post(URL + "/4")
                 .with(TestUtil.userHttpBasic(UserTestData.admin))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(expected)))
@@ -106,10 +106,9 @@ public class DishControllerTest extends AbstractControllerTest {
         Integer newId = created.getId();
         expected.setId(newId);
 
-       // DISH_MATCHER.assertMatch(created, expected);
-       // DISH_MATCHER.assertMatch(dishRestController.getAll(), dishListWithNew);
+        DISH_MATCHER.assertMatch(created, expected);
+        DISH_MATCHER.assertMatch(dishRestController.getAll(), dishListWithNew);
     }
-
 
 
 }

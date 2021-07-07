@@ -110,6 +110,7 @@ public class RestaurantControllerTest extends AbstractControllerTest {
 
         RESTAURANT_MATCHER.assertMatch(restaurantRestController.getAll(), restaurantListForDelete);
     }
+
 }
 
 

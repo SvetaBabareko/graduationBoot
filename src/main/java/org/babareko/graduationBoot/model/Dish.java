@@ -34,9 +34,10 @@ public class Dish extends AbstractEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     //@OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     //@JsonManagedReference
-    @NotNull
+    //@NotNull
     private Restaurant restaurant;
 
 

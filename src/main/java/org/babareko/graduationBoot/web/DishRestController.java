@@ -3,7 +3,6 @@ package org.babareko.graduationBoot.web;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.babareko.graduationBoot.model.Dish;
-import org.babareko.graduationBoot.model.Restaurant;
 import org.babareko.graduationBoot.repository.DishRepository;
 import org.babareko.graduationBoot.repository.RestaurantRepository;
 import org.springframework.http.HttpStatus;
@@ -28,10 +27,10 @@ public class DishRestController {
     private final DishRepository dishRepository;
     private final RestaurantRepository restaurantRepository;
 
-   @GetMapping
-   public List<Dish> getAll() {
-       log.info("get all dishes {}");
-       return dishRepository.findAll();
+    @GetMapping
+    public List<Dish> getAll() {
+        log.info("get all dishes {}");
+        return dishRepository.findAll();
     }
 
     @GetMapping("/{id}")
@@ -40,13 +39,13 @@ public class DishRestController {
         return dishRepository.findById(id);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> create(@Valid @RequestBody Dish dish) {
-       // log.info("create dish {} for the restaurant {}", dish, restaurantId);
-        //dish.setRestaurant(restaurantRepository.getById(restaurantId));
+    @PostMapping(value = "/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Dish> create(@Valid @RequestBody Dish dish, @PathVariable int restaurantId) {
+        log.info("create dish {} for the restaurant {}", dish, restaurantId);
+        dish.setRestaurant(restaurantRepository.getById(restaurantId));
         Dish created = dishRepository.save(dish);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(URL + "/{id}")
+                .path(URL + "dishes/{id}")
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
@@ -60,8 +59,6 @@ public class DishRestController {
                 .orElseThrow(EntityNotFoundException::new);
         dishRepository.delete(dish);
     }
-
-
 
 
 }

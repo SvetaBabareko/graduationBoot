@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Restaurant extends AbstractEntity{
     @NotBlank
     @Column(name = "name", nullable = false)
@@ -34,11 +34,11 @@ public class Restaurant extends AbstractEntity{
         this.description = description;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+   // @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
           //  cascade = CascadeType.ALL)
     //@JsonIgnore
     //@JsonBackReference
-    private List<Dish> dishes;
+   // private List<Dish> dishes;
 
     public Restaurant(String name, String description) {
         this.name = name;
