@@ -67,6 +67,5 @@ public class UserService implements UserDetailsService {
         user.setName(userTo.getName());
         String password = user.getPassword();
         user.setPassword(StringUtils.hasText(password) ? passwordEncoder.encode(password) : password);
-       // return user;
     }
 }
