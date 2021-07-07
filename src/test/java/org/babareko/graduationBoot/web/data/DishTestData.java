@@ -71,7 +71,7 @@ public class DishTestData {
             dish9, dish10, dish11, dish12, dish13, dish14, dish15, dish16, dish17, dish18, dish19, dish20, dish21,
             dish22, dish23, dish24, dish25);
 
-    public static final List<Dish> dishListForRestaurant4 = List.of(dish1, dish2, dish3, dish4);
+    public static final List<Dish> dishListForRestaurant4 = List.of(dish3, dish4, dish5, dish6);
 
     public static final Dish dishNew = new Dish("New_dish", 1234.99, restaurant4);
 

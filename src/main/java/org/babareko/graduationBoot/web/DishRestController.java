@@ -3,6 +3,7 @@ package org.babareko.graduationBoot.web;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.babareko.graduationBoot.model.Dish;
+import org.babareko.graduationBoot.model.Restaurant;
 import org.babareko.graduationBoot.repository.DishRepository;
 import org.babareko.graduationBoot.repository.RestaurantRepository;
 import org.springframework.http.HttpStatus;
@@ -29,8 +30,15 @@ public class DishRestController {
 
     @GetMapping
     public List<Dish> getAll() {
-        log.info("get all dishes {}");
+        log.info("get all dishes");
         return dishRepository.findAll();
+    }
+
+    @GetMapping(value = "/restaurant/{restaurantId}")
+    public List<Dish> getAllForRestaurant(@PathVariable int restaurantId) {
+        log.info("get dishes for restaurant id {}", restaurantId);
+        Restaurant restaurant = restaurantRepository.getById(restaurantId);
+        return dishRepository.findAllByRestaurant(restaurant);
     }
 
     @GetMapping("/{id}")

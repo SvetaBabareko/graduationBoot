@@ -41,8 +41,19 @@ public class DishControllerTest extends AbstractControllerTest {
 
     @Test
     @DirtiesContext(methodMode = BEFORE_METHOD)
+    public void getAllForRestaurant()throws Exception {
+        perform(MockMvcRequestBuilders.get(URL + "/restaurant/4")
+                .with(TestUtil.userHttpBasic(UserTestData.admin)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(DISH_MATCHER.contentJson(dishListForRestaurant4));
+    }
+
+    @Test
+    @DirtiesContext(methodMode = BEFORE_METHOD)
     public void getAllForUser() throws Exception {
-        perform(MockMvcRequestBuilders.get(URL + "/")
+        perform(MockMvcRequestBuilders.get(URL + "/4")
                 .with(TestUtil.userHttpBasic(UserTestData.user)))
                 .andExpect(status().isOk())
                 .andDo(print())

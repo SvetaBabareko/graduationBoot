@@ -31,11 +31,6 @@ public class RestaurantRestController {
         return restaurantRepository.findAll();
     }
 
-    @GetMapping("/{id}/dishes")
-    public Restaurant getWithDishes(@PathVariable Integer id) {
-        log.info("get restaurant {} with dishes", id);
-        return restaurantRepository.findAllWithDishes(id);
-    }
 
     @GetMapping("/{id}")
     public Optional<Restaurant> get(@PathVariable Integer id) {
