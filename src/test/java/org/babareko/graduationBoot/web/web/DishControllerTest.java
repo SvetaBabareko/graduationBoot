@@ -1,7 +1,6 @@
 package org.babareko.graduationBoot.web.web;
 
 import org.babareko.graduationBoot.model.Dish;
-import org.babareko.graduationBoot.model.Restaurant;
 import org.babareko.graduationBoot.util.json.JsonUtil;
 import org.babareko.graduationBoot.web.AbstractControllerTest;
 import org.babareko.graduationBoot.web.DishRestController;
@@ -17,7 +16,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.babareko.graduationBoot.web.data.DishTestData.*;
-import static org.babareko.graduationBoot.web.data.RestaurantTestData.*;
 import static org.springframework.test.annotation.DirtiesContext.MethodMode.BEFORE_METHOD;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
