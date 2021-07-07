@@ -7,6 +7,7 @@ import org.babareko.graduationBoot.model.Role;
 import org.babareko.graduationBoot.model.User;
 import org.babareko.graduationBoot.repository.UserRepository;
 import org.babareko.graduationBoot.service.UserService;
+import org.babareko.graduationBoot.to.UserTo;
 import org.babareko.graduationBoot.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -24,6 +25,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.EnumSet;
 import java.util.List;
+
+import static org.babareko.graduationBoot.util.ValidationUtil.assureIdConsistent;
 
 @RestController
 @RequestMapping(AccountController.URL)
@@ -73,18 +76,16 @@ public class AccountController {
     public List<User> getAll() {
         return userService.getAll();
     }
-/*
+
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CachePut(value = "users", key = "#authUser.username")
-    public User update(@Valid @RequestBody User user, @AuthenticationPrincipal AuthUser authUser) {
-        log.info("update {} to {}", authUser, user);
-        User oldUser = authUser.getUser();
-        ValidationUtil.assureIdConsistent(user, oldUser.getId());
-        user.setRoles(oldUser.getRoles());
-        if (user.getPassword() == null) {
-            user.setPassword(oldUser.getPassword());
-        }
-        return userRepository.save(user);
-    }*/
+   // @CachePut(value = "users", key = "#authUser.username")
+    public void update(@Valid @RequestBody UserTo userTo, @AuthenticationPrincipal AuthUser authUser) {
+        log.info("update {} to {}", authUser, userTo);
+
+        int id = authUser.id();
+        log.info("update {} with id={}", userTo, id);
+        assureIdConsistent(userTo, id);
+        //return userService.update(userTo);
+    }
 }

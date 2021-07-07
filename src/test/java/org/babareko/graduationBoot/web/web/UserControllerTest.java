@@ -75,12 +75,30 @@ public class UserControllerTest extends AbstractControllerTest {
         USER_MATCHER.assertMatch(userService.get(newId), returned);
     }
 
+
+    @Test
+    public void updateProfile() throws Exception {
+        UserTo updatedTo = getUpdated();
+        perform(MockMvcRequestBuilders.put(URL).contentType(MediaType.APPLICATION_JSON)
+                .with(TestUtil.userHttpBasic(user2))
+                .content(JsonUtil.writeValue(updatedTo)))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+        USER_MATCHER.assertMatch(accountController.getAll(), List.of(admin, user, user2));
+    }
+
     @Test
     public void delete() throws Exception {
         perform(MockMvcRequestBuilders.delete(URL)
                 .with(TestUtil.userHttpBasic(user)))
                 .andExpect(status().isNoContent());
-        USER_MATCHER.assertMatch(accountController.getAll(), List.of(admin,user2));
+        USER_MATCHER.assertMatch(accountController.getAll(), List.of(admin, user2));
+    }
+
+    @Test
+    public void getUnAuth() throws Exception {
+        perform(MockMvcRequestBuilders.get(URL))
+                .andExpect(status().isUnauthorized());
     }
 
 
