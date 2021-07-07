@@ -16,7 +16,6 @@ public class UserTestData {
     public static final User user = new User(User1_ID+1, "User", "1111", List.of(Role.USER));
     public static final User user2 = new User(User1_ID+2, "User2", "user", List.of(Role.USER));
 
-   // public static final UserTo user2Update = new UserTo(User1_ID+2, "User2_update", "user_update");
 
     public static UserTo getNew() {
         return new UserTo(null, "new_Username", "new_password");
