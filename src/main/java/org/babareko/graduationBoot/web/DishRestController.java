@@ -9,6 +9,8 @@ import org.babareko.graduationBoot.repository.RestaurantRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -29,6 +31,7 @@ public class DishRestController {
     private final RestaurantRepository restaurantRepository;
 
     @GetMapping
+   // @PreAuthorize("hasRole('ADMIN')")
     public List<Dish> getAll() {
         log.info("get all dishes");
         return dishRepository.findAll();
@@ -48,6 +51,8 @@ public class DishRestController {
     }
 
     @PostMapping(value = "/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ADMIN')")
+    @Secured("ADMIN")
     public ResponseEntity<Dish> create(@Valid @RequestBody Dish dish, @PathVariable int restaurantId) {
         log.info("create dish {} for the restaurant {}", dish, restaurantId);
         dish.setRestaurant(restaurantRepository.getById(restaurantId));
@@ -61,6 +66,7 @@ public class DishRestController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(@PathVariable int id) throws EntityNotFoundException {
         log.info("delete dish {}", id);
         Dish dish = dishRepository.findById(id)
