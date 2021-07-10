@@ -52,7 +52,6 @@ public class DishRestController {
 
     @PostMapping(value = "/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ADMIN')")
-    @Secured("ADMIN")
     public ResponseEntity<Dish> create(@Valid @RequestBody Dish dish, @PathVariable int restaurantId) {
         log.info("create dish {} for the restaurant {}", dish, restaurantId);
         dish.setRestaurant(restaurantRepository.getById(restaurantId));
@@ -61,6 +60,19 @@ public class DishRestController {
                 .path(URL + "dishes/{id}")
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
+    }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public Dish update(@PathVariable(value = "id") Integer id,
+                             @Valid @RequestBody Dish dish) throws EntityNotFoundException {
+        log.info("update dish {}", dish);
+        Dish dishUpdate = dishRepository.getById(dish.getId());
+        dishUpdate.setName(dish.getName());
+        dishUpdate.setPrice(dish.getPrice());
+        dishUpdate.setRestaurant(dish.getRestaurant());
+        return dishRepository.save(dishUpdate);
     }
 
 
@@ -73,6 +85,8 @@ public class DishRestController {
                 .orElseThrow(EntityNotFoundException::new);
         dishRepository.delete(dish);
     }
+
+
 
 
 }
