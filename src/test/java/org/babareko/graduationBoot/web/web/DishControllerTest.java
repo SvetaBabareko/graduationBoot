@@ -1,7 +1,6 @@
 package org.babareko.graduationBoot.web.web;
 
 import org.babareko.graduationBoot.model.Dish;
-import org.babareko.graduationBoot.model.Restaurant;
 import org.babareko.graduationBoot.util.json.JsonUtil;
 import org.babareko.graduationBoot.web.AbstractControllerTest;
 import org.babareko.graduationBoot.web.DishRestController;
@@ -11,7 +10,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.ResultActions;
@@ -55,7 +53,7 @@ public class DishControllerTest extends AbstractControllerTest {
     @Test
     @DirtiesContext(methodMode = BEFORE_METHOD)
     public void getAllForUser() throws Exception {
-        perform(MockMvcRequestBuilders.get(URL + "/4")
+        perform(MockMvcRequestBuilders.get(URL + "/")
                 .with(TestUtil.userHttpBasic(UserTestData.user)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -123,11 +121,10 @@ public class DishControllerTest extends AbstractControllerTest {
     @Test
     @DirtiesContext(methodMode = BEFORE_METHOD)
     public void createForUser() throws Exception {
-        Dish expected = dishNew;
         perform(MockMvcRequestBuilders.post(URL + "/4")
                 .with(TestUtil.userHttpBasic(UserTestData.user))
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(expected)))
+                .content(JsonUtil.writeValue(dishNew)))
                 .andExpect(status().isForbidden());
     }
 
@@ -147,6 +144,17 @@ public class DishControllerTest extends AbstractControllerTest {
         expected.setId(newId);
 
         DISH_MATCHER.assertMatch(updated, expected);
+    }
+
+    @Test
+    public void updateForUser() throws Exception {
+        Dish expected = getUpdated();
+
+        ResultActions action = perform(MockMvcRequestBuilders.put(URL + "/15")
+                .with(TestUtil.userHttpBasic(UserTestData.user2))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(expected)))
+                .andExpect(status().isForbidden());
     }
 
 
