@@ -1,6 +1,7 @@
 package org.babareko.graduationBoot.web.web;
 
 import org.babareko.graduationBoot.model.Dish;
+import org.babareko.graduationBoot.model.Restaurant;
 import org.babareko.graduationBoot.util.json.JsonUtil;
 import org.babareko.graduationBoot.web.AbstractControllerTest;
 import org.babareko.graduationBoot.web.DishRestController;
@@ -42,7 +43,7 @@ public class DishControllerTest extends AbstractControllerTest {
 
     @Test
     @DirtiesContext(methodMode = BEFORE_METHOD)
-    public void getAllForRestaurant()throws Exception {
+    public void getAllForRestaurant() throws Exception {
         perform(MockMvcRequestBuilders.get(URL + "/restaurant/4")
                 .with(TestUtil.userHttpBasic(UserTestData.admin)))
                 .andExpect(status().isOk())
@@ -119,6 +120,34 @@ public class DishControllerTest extends AbstractControllerTest {
         DISH_MATCHER.assertMatch(dishRestController.getAll(), dishListWithNew);
     }
 
+    @Test
+    @DirtiesContext(methodMode = BEFORE_METHOD)
+    public void createForUser() throws Exception {
+        Dish expected = dishNew;
+        perform(MockMvcRequestBuilders.post(URL + "/4")
+                .with(TestUtil.userHttpBasic(UserTestData.user))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(expected)))
+                .andExpect(status().isForbidden());
+    }
+
+
+    @Test
+    public void updateForAdmin() throws Exception {
+        Dish expected = getUpdated();
+
+        ResultActions action = perform(MockMvcRequestBuilders.put(URL + "/15")
+                .with(TestUtil.userHttpBasic(UserTestData.admin))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(expected)))
+                .andExpect(status().isNoContent());
+
+        Dish updated = TestUtil.readFromJson(action, Dish.class);
+        Integer newId = updated.getId();
+        expected.setId(newId);
+
+        DISH_MATCHER.assertMatch(updated, expected);
+    }
 
 
 }

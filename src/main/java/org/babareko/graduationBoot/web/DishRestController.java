@@ -71,7 +71,7 @@ public class DishRestController {
         Dish dishUpdate = dishRepository.getById(dish.getId());
         dishUpdate.setName(dish.getName());
         dishUpdate.setPrice(dish.getPrice());
-        dishUpdate.setRestaurant(dish.getRestaurant());
+      //  dishUpdate.setRestaurant(dish.getRestaurant());
         return dishRepository.save(dishUpdate);
     }
 

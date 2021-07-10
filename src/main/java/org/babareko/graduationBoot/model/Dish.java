@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Dish extends AbstractEntity{
+public class Dish extends AbstractEntity {
     @Column(name = "name", nullable = false)
     @NotBlank
     @Size(min = 1, max = 100)
@@ -51,4 +51,6 @@ public class Dish extends AbstractEntity{
         this.name = name;
         this.price = price;
     }
+
+
 }

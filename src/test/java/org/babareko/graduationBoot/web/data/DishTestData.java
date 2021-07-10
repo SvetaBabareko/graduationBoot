@@ -84,6 +84,6 @@ public class DishTestData {
             dish22, dish23, dish24, dish25);
 
     public static Dish getUpdated() {
-        return new Dish("Name_Updated", 1234567.11, restaurant4);
+        return new Dish(15, "Name_Updated", 1234.11);
     }
 }
