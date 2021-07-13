@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.babareko.graduationBoot.model.Vote;
 import org.babareko.graduationBoot.repository.VoteRepository;
 import org.babareko.graduationBoot.service.VoteService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +23,9 @@ public class VoteRestController {
     private final VoteService voteService;
 
     @GetMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Vote> getAll() {
-        log.info("getAll");
+        log.info("getAll votes");
         return voteService.findAll();
     }
 }

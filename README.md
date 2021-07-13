@@ -1,6 +1,6 @@
 # Выпускной проект Topjava
 
-Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) without frontend.
+Design and implement a REST API using Hibernate/Spring/SpringMVC (or<h5> Spring-Boot</h5>) without frontend.
 
 The task is:
 
@@ -21,4 +21,18 @@ As a result, provide a link to github repository. It should contain the code, RE
 P.S.: Make sure everything works with latest version that is on github :)
 
 P.P.S.: Assume that your API will be used by a frontend developer to build frontend on top of that.
+______________________________________
+curl commands:
 
+<h5>Restaurant</h5>
+
+GET all restaurants:
+curl -s http://localhost:8080/api/restaurants --user Admin:admin
+
+GET restaurant:
+curl -s http://localhost:8080/api/restaurants/8 --user Admin:admin
+
+CREATE restaurant:
+curl -s -X POST -d '{"name":"New_Restaurant","description":"Description for a new restaurant"}' -H 
+'Content-Type:application/json;charset=UTF-8' 
+http://localhost:8080/api/restaurants --user Admin:admin

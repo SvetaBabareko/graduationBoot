@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class VoteService {
-    public static final Logger LOG = LoggerFactory.getLogger(UserService.class);
+    public static final Logger LOG = LoggerFactory.getLogger(VoteService.class);
 
     private final VoteRepository voteRepository;
 
