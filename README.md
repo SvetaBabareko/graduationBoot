@@ -29,10 +29,10 @@ curl commands:
 <h5>GET all restaurants:</h5>
 curl -s http://localhost:8080/api/restaurants --user Admin:admin
 
-GET restaurant:
+<h5>GET restaurant:</h5>
 curl -s http://localhost:8080/api/restaurants/8 --user Admin:admin
 
-CREATE restaurant:
+<h5>CREATE restaurant:</h5>
 curl -s -X POST -d '{"name":"New_Restaurant","description":"Description for a new restaurant"}' -H 
 'Content-Type:application/json;charset=UTF-8' 
 http://localhost:8080/api/restaurants --user Admin:admin
