@@ -24,7 +24,7 @@ P.P.S.: Assume that your API will be used by a frontend developer to build front
 ______________________________________
 curl commands:
 
-<h4>Restaurant</h4>
+<h3>Restaurant</h3>
 
 <h5>GET all restaurants:</h5>
 curl -s http://localhost:8080/api/restaurants --user Admin:admin
@@ -36,3 +36,11 @@ curl -s http://localhost:8080/api/restaurants/8 --user Admin:admin
 curl -s -X POST -d '{"name":"New_Restaurant","description":"Description for a new restaurant"}' -H 
 'Content-Type:application/json;charset=UTF-8' 
 http://localhost:8080/api/restaurants --user Admin:admin
+
+<h5>UPDATE restaurant:</h5>
+curl -s -X PUT -d '{"name":"Update_Restaurant","description":"Description for update restaurant"}' -H
+'Content-Type:application/json;charset=UTF-8'
+http://localhost:8080/api/restaurants/12 --user Admin:admin
+
+<h5>DELETE restaurant:</h5>
+curl -s -X DELETE http://localhost:8080/api/restaurants/8 --user Admin:admin
