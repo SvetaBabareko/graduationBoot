@@ -44,3 +44,47 @@ http://localhost:8080/api/restaurants/12 --user Admin:admin
 
 <h5>DELETE restaurant:</h5>
 curl -s -X DELETE http://localhost:8080/api/restaurants/8 --user Admin:admin
+
+
+<h3>DISH</h3>
+
+<h5>GET all dishes:</h5>
+curl -s http://localhost:8080/api/dishes --user Admin:admin
+
+<h5>GET dish:</h5>
+curl -s http://localhost:8080/api/dishes/26 --user Admin:admin
+
+<h5>GET all dishes for restaurant:</h5>
+curl -s http://localhost:8080/api/dishes/restaurant/4 --user Admin:admin
+curl -s http://localhost:8080/api/dishes/restaurant/4 --user User:1111
+
+<h5>DELETE dish:</h5>
+curl -s -X DELETE http://localhost:8080/api/dishes/16 --user Admin:admin
+
+<h5>CREATE dishes:</h5>
+curl -s -X POST -d '{"name":"New_dish","price":"123.44", "restaurnat": {"id": "7", "name":"BAR:DOT XX1","description":"Hotel Restaurant, Asian, Fusion"}' -H
+'Content-Type:application/json;charset=UTF-8'
+http://localhost:8080/api/dishes --user Admin:admin
+
+<h5>UPDATE dishes:</h5>
+curl -s -X PUT -d '{"id":"15", "name":"update_dish","price":"123.44"}' -H
+'Content-Type:application/json;charset=UTF-8'
+http://localhost:8080/api/dishes/15 --user Admin:admin
+
+<h3>USER</h3>
+
+<h5>GET account:</h5>
+curl -s http://localhost:8080/api/account/ --user User:1111
+
+<h5>GET REGISTER account:</h5>
+curl -s http://localhost:8080/api/account/register 
+
+<h5>UPDATE account:</h5>
+curl -s -X PUT -d '{"id":"3", "name":"User2_update","password":"user_update"}' -H
+'Content-Type:application/json;charset=UTF-8'
+http://localhost:8080/api/account --user Admin:admin
+
+<h5>DELETE account:</h5>
+curl -s -X DELETE http://localhost:8080/api/account --user User:1111
+
+
