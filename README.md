@@ -24,10 +24,10 @@ P.P.S.: Assume that your API will be used by a frontend developer to build front
 ______________________________________
 curl commands:
 
-<h5>Restaurant</h5>
+<h6>Restaurant</h6>
 
-GET all restaurants:
-curl -s http://localhost:8080/api/restaurants --user Admin:admin
+<h5>GET all restaurants:</h5>
+<br>curl -s http://localhost:8080/api/restaurants --user Admin:admin
 
 GET restaurant:
 curl -s http://localhost:8080/api/restaurants/8 --user Admin:admin
